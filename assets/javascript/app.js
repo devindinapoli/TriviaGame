@@ -62,7 +62,7 @@ $(document).ready(function () {
 
     //gameContent function
     function gameContent(){
-        gameElements = "<p class='text-center timer'> Time: <span class='timer'>10</span></p><p class='text-center'>" + questionArray[questionCount] + "</p><p class='answer'>A. " + answerArray[questionCount][0] + "</p><p class='answer'>B. " + answerArray[questionCount][1]+"</p><p class='answer'>C. "+ answerArray[questionCount][2]+ "</p><p class='answer'>D. " + answerArray[questionCount][3]+"</p>";
+        gameElements = "<p class='text-center timer'> Time Remaining: <span class='timer'>10</span></p><p class='text-center'>" + questionArray[questionCount] + "</p><p class='answer'>A. " + answerArray[questionCount][0] + "</p><p class='answer'>B. " + answerArray[questionCount][1]+"</p><p class='answer'>C. "+ answerArray[questionCount][2]+ "</p><p class='answer'>D. " + answerArray[questionCount][3]+"</p>";
         $(".quizArea").html(gameElements);
     };
 
