@@ -103,7 +103,7 @@ $(document).ready(function () {
         correct++;
         gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Correct! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
         $(".quizArea").html(gameElements);
-        setTimeout(pause, 1);
+        setTimeout(pause, 5500);
     };
 
     //addLoss function
@@ -114,7 +114,7 @@ $(document).ready(function () {
         wrong++;
         gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>WRONG!! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
         $(".quizArea").html(gameElements);
-        setTimeout(pause, 1000);
+        setTimeout(pause, 5500);
     };
 
     //outOfTime function
@@ -125,7 +125,7 @@ $(document).ready(function () {
         unAnswered++;
         gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Out of Time! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
         $(".quizArea").html(gameElements);
-        setTimeout(pause, 1);       
+        setTimeout(pause, 5500);       
     }
 
     //pause function (inbetween questions)
