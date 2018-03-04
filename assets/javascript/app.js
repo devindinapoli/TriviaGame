@@ -1,12 +1,13 @@
 $(document).ready(function () {
     //Variables including answer, gif, and question array
-    var countDown = 30;
+    var countDown = 10;
     var questionCount = 0;
     var selectedAnswer;
     var clock;
     var correct;
     var wrong;
-    var unanswered;
+    var unAnswered;
+    var chosenAnswer;
 
     var questionArray = ["What movie does the show 'Rick and Morty' resemble?",
         "What is the first rule of Fight Club?",
@@ -35,14 +36,14 @@ $(document).ready(function () {
         "C. To seek the Holy Grail",
         "A. What do you mean? An African or European swallow?"];
 
-    var gifArray = ["<img class='center-block img-right' src='images/RickMorty.gif'>",
-         "<img class='center-block img-right' src='images/FightClub.gif'>",
-         "<img class='center-block img-right' src='images/Fox.gif'>",
-         "<img class='center-block img-right' src='images/Nope.gif>", 
-         "<img class='center-block img-right' src='images/Ghostbusters.gif'>", 
-         "<img class='center-block img-right' src='images/Name.gif'>", 
-         "<img class='center-block img-right' src='images/Quest.gif'>", 
-         "<img class='center-block img-right' src='images/RunAway.gif'>"];
+    var gifArray = ["<img class='center-block img-right gif' src='assets/images/RickMorty.gif'>",
+         "<img class='center-block img-right gif' src='assets/images/FightClub.gif'>",
+         "<img class='center-block img-right gif' src='assets/images/Fox.gif'>",
+         "<img class='center-block img-right gif' src='assets/images/Nope.gif'>", 
+         "<img class='center-block img-right gif' src='assets/images/Ghostbusters.gif'>", 
+         "<img class='center-block img-right gif' src='assets/images/Name.gif'>", 
+         "<img class='center-block img-right gif' src='https://thumbs.gfycat.com/GoodCreamyAmphiuma-size_restricted.gif'>", 
+         "<img class='center-block img-right gif' src='https://thumbs.gfycat.com/WhoppingSinfulAsianlion-size_restricted.gif'>"];
 
     //function for the Initial start screen
     function introScreen() {
@@ -64,20 +65,87 @@ $(document).ready(function () {
         $(".quizArea").html(gameElements);
     };
 
-    //timeClock function
+    //function to countdown the timer
     function timeClock(){
-        Clock = setInterval(thirtySec, 1000);
+        clock = setInterval(thirtySec, 1000);
 	function thirtySec() {
 		if (countDown === 0) {
-			clearInterval(clock);
-			generateLossDueToTimeOut();
+            clearInterval(clock);
+            outOfTime();
+			
 		}
 		if (countDown > 0) {
 			countDown--;
 		}
 		$(".timer").html("Time: " + countDown);
+        };
     };
-};
+
+    //on click for the answers 
+    $('.jumbotron').on("click", ".answer", function(){
+        chosenAnswer = $(this).text();
+        if(chosenAnswer == correctAnswer[questionCount]){
+           clearInterval(clock);
+           addWin();
+           alert("correct");
+        }
+        else{
+            clearInterval(clock);
+            addLoss();
+        }
+    });
+
+    //addWin function
+    function addWin(){
+        var audioWin = document.createElement('audio');
+        audioWin.setAttribute('src', 'assets/correct.mp3');
+        audioWin.play();
+        correct++;
+        gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Correct! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
+        $(".quizArea").html(gameElements);
+        setTimeout(pause, 5500);
+    };
+
+    //addLoss function
+    function addLoss(){
+        var audioLoss = document.createElement('audio');
+        audioLoss.setAttribute('src', 'assets/wrong.mp3');
+        audioLoss.play();
+        wrong++;
+        gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>WRONG!! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
+        $(".quizArea").html(gameElements);
+        setTimeout(pause, 5500);
+    };
+
+    //outOfTime function
+    function outOfTime(){
+        var audioLoss = document.createElement('audio');
+        audioLoss.setAttribute('src', 'assets/wrong.mp3');
+        audioLoss.play();
+        unAnswered++;
+        gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Out of Time! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
+        $(".quizArea").html(gameElements);
+        setTimeout(pause, 5500);       
+    }
+
+    //pause function (inbetween questions)
+    function pause(){
+        if(questionCount < 7){
+            questionCount++;
+            gameContent();
+            countDown = 10;
+            timeClock();
+        }
+        else{
+            resultScreen();
+        }
+    };
+    
+   
+    
+
+
+
 
 
 
