@@ -69,16 +69,15 @@ $(document).ready(function () {
     //function to countdown the timer
     function timeClock(){
         clock = setInterval(thirtySec, 1000);
-	function thirtySec() {
-		if (countDown === 0) {
+	    function thirtySec() {
+		    if (countDown === 0) {
             clearInterval(clock);
             outOfTime();
-			
-		}
-		if (countDown > 0) {
+            }
+		    if (countDown > 0) {
 			countDown--;
-		}
-		$(".timer").html("Time: " + countDown);
+		    }
+		    $(".timer").html("Time: " + countDown);
         };
     };
 
@@ -126,7 +125,7 @@ $(document).ready(function () {
         gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Out of Time! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
         $(".quizArea").html(gameElements);
         setTimeout(pause, 5500);       
-    }
+    };
 
     //pause function (inbetween questions)
     function pause(){
