@@ -4,10 +4,11 @@ $(document).ready(function () {
     var questionCount = 0;
     var selectedAnswer;
     var clock;
-    var correct;
-    var wrong;
-    var unAnswered;
+    var correct = 0;
+    var wrong = 0;
+    var unAnswered = 0;
     var chosenAnswer;
+    var gameElements;
 
     var questionArray = ["What movie does the show 'Rick and Morty' resemble?",
         "What is the first rule of Fight Club?",
@@ -36,14 +37,14 @@ $(document).ready(function () {
         "C. To seek the Holy Grail",
         "A. What do you mean? An African or European swallow?"];
 
-    var gifArray = ["<img class='center-block img-right gif' src='assets/images/RickMorty.gif'>",
-         "<img class='center-block img-right gif' src='assets/images/FightClub.gif'>",
-         "<img class='center-block img-right gif' src='assets/images/Fox.gif'>",
-         "<img class='center-block img-right gif' src='assets/images/Nope.gif'>", 
-         "<img class='center-block img-right gif' src='assets/images/Ghostbusters.gif'>", 
-         "<img class='center-block img-right gif' src='assets/images/Name.gif'>", 
-         "<img class='center-block img-right gif' src='https://thumbs.gfycat.com/GoodCreamyAmphiuma-size_restricted.gif'>", 
-         "<img class='center-block img-right gif' src='https://thumbs.gfycat.com/WhoppingSinfulAsianlion-size_restricted.gif'>"];
+    var gifArray = ["<img class='center-block gif' src='assets/images/RickMorty.gif'>",
+         "<img class='center-block gif' src='assets/images/FightClub.gif'>",
+         "<img class='center-block gif' src='assets/images/Fox.gif'>",
+         "<img class='center-block gif' src='assets/images/Nope.gif'>", 
+         "<img class='center-block gif' src='assets/images/Ghostbusters.gif'>", 
+         "<img class='center-block gif' src='assets/images/Name.gif'>", 
+         "<img class='center-block gif' src='https://thumbs.gfycat.com/GoodCreamyAmphiuma-size_restricted.gif'>", 
+         "<img class='center-block gif' src='https://thumbs.gfycat.com/WhoppingSinfulAsianlion-size_restricted.gif'>"];
 
     //function for the Initial start screen
     function introScreen() {
@@ -61,7 +62,7 @@ $(document).ready(function () {
 
     //gameContent function
     function gameContent(){
-        gameElements = "<p class='text-center timer'> Time: <span class='timer'>30</span></p><p class='text-center'>" + questionArray[questionCount] + "</p><p class='answer'>A. " + answerArray[questionCount][0] + "</p><p class='answer'>B. " + answerArray[questionCount][1]+"</p><p class='answer'>C. "+ answerArray[questionCount][2]+ "</p><p class='answer'>D. " + answerArray[questionCount][3]+"</p>";
+        gameElements = "<p class='text-center timer'> Time: <span class='timer'>10</span></p><p class='text-center'>" + questionArray[questionCount] + "</p><p class='answer'>A. " + answerArray[questionCount][0] + "</p><p class='answer'>B. " + answerArray[questionCount][1]+"</p><p class='answer'>C. "+ answerArray[questionCount][2]+ "</p><p class='answer'>D. " + answerArray[questionCount][3]+"</p>";
         $(".quizArea").html(gameElements);
     };
 
@@ -84,10 +85,9 @@ $(document).ready(function () {
     //on click for the answers 
     $('.jumbotron').on("click", ".answer", function(){
         chosenAnswer = $(this).text();
-        if(chosenAnswer == correctAnswer[questionCount]){
+        if(chosenAnswer === correctAnswer[questionCount]){
            clearInterval(clock);
            addWin();
-           alert("correct");
         }
         else{
             clearInterval(clock);
@@ -103,7 +103,7 @@ $(document).ready(function () {
         correct++;
         gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Correct! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
         $(".quizArea").html(gameElements);
-        setTimeout(pause, 5500);
+        setTimeout(pause, 1);
     };
 
     //addLoss function
@@ -114,7 +114,7 @@ $(document).ready(function () {
         wrong++;
         gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>WRONG!! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
         $(".quizArea").html(gameElements);
-        setTimeout(pause, 5500);
+        setTimeout(pause, 1000);
     };
 
     //outOfTime function
@@ -125,7 +125,7 @@ $(document).ready(function () {
         unAnswered++;
         gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Out of Time! Answer: " + correctAnswer[questionCount] + "</p>" + gifArray[questionCount];
         $(".quizArea").html(gameElements);
-        setTimeout(pause, 5500);       
+        setTimeout(pause, 1);       
     }
 
     //pause function (inbetween questions)
@@ -140,39 +140,27 @@ $(document).ready(function () {
             resultScreen();
         }
     };
-    
-   
-    
 
+    //resultScreen function
+    function resultScreen(){
+        gameElements = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + countDown + "</span></p>" + "<p class='text-center'>Here Are Your Results!" + "</p>" + "<p>Correct Answers: " + correct + "</p>" + "<p>Wrong Answers: " + wrong + "</p>" + "<p>Unanswered: " + unAnswered + "</p>" + "<img class='center-block gif' src='assets/images/final.gif'>" + "<p class='text-center reset-button-container'><a class='btn btn-primary btn-lg btn-block reset-button' href='#' role='button'>Try Again?</a></p>";
+        $(".quizArea").html(gameElements);
+    };
 
+    //resetGame function
+    function resetGame(){
+        questionCount = 0;
+        correct = 0;
+        wrong = 0;
+        unAnswered = 0;
+        countDown = 10
 
+        gameContent();
+        timeClock();
+    };
 
-
-
-
-
-    
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //onclick for reset button
+    $(".jumbotron").on("click", ".reset-button", function(){
+        resetGame();
+    });
 });

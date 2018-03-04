@@ -13,6 +13,7 @@ body{
 }
 .jumbotron{
     background-color: #B7ABAB;
+    text-align: center
 }
 .answer {
     padding-top: 7px;
@@ -21,11 +22,12 @@ body{
     padding-left: 14px;
     background-color: white;
     border-radius: 8px;
+    text-align: left;
 }
 .gif{
     width: 200px;
     height: 200px;
-    margin-left: 400px;
+    
 }
 
 
