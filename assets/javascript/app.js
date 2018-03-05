@@ -41,7 +41,7 @@ $(document).ready(function () {
          "<img class='center-block gif' src='assets/images/FightClub.gif'>",
          "<img class='center-block gif' src='assets/images/Fox.gif'>",
          "<img class='center-block gif' src='assets/images/Nope.gif'>", 
-         "<img class='center-block gif' src='assets/images/Ghostbusters.gif'>", 
+         "<img class='center-block gif' src='assets/images/GhostBusters.gif'>", 
          "<img class='center-block gif' src='assets/images/Name.gif'>", 
          "<img class='center-block gif' src='https://thumbs.gfycat.com/GoodCreamyAmphiuma-size_restricted.gif'>", 
          "<img class='center-block gif' src='https://thumbs.gfycat.com/WhoppingSinfulAsianlion-size_restricted.gif'>"];
